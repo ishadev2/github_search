@@ -1,0 +1,16 @@
+.resultContainer {
+  display: block;
+}
+
+.resultInfo{
+  display: block;
+  margin-bottom: 10px;
+}
+
+.resultList {
+  display: block;
+}
+
+.resultList .resultItem {
+  display: block;
+}

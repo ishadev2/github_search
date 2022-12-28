@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+import Search from "./components/Search";
+import ResultView from "./components/ResultView";
+
+import "./App.css";
+
+const App = (): JSX.Element => {
+  const [respond, setRespond] = useState<any[]>([]); //stores returned responce
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search setRespond={setRespond} />
+      <ResultView results={respond}></ResultView>
     </div>
   );
-}
+};
 
 export default App;
+
+/*
+- Use the following API from GitHub: https://docs.github.com/en/rest/reference/search
+- Implement a design in CSS. It can be as simple as you want.
+- Implement throttling to fetch data from the API.
+- Implement pagination.
+*/
