@@ -15,7 +15,12 @@ const ResultView = (props: any): JSX.Element => {
 
   return (
     <div className={styles.resultContainer}>
-      <div className={styles.resultInfo}>{resCount} result(s) found</div>
+      {resCount < 0 ? (
+        <div className={styles.resultInfo}>Error occurred. Please try again later.</div>
+      ) : (
+        <div className={styles.resultInfo}>{resCount} result(s) found</div>
+      )}
+
       <div className={styles.resultList}>
         {results &&
           results.map((entry: any, i: number) => {
@@ -26,7 +31,12 @@ const ResultView = (props: any): JSX.Element => {
             );
           })}
       </div>
-      <Pagination resCount={resCount} />
+      <Pagination
+        resCount={resCount}
+        searchWords={props.searchWords}
+        setRespond={props.setRespond}
+        showLoader={props.showLoader}
+      />
     </div>
   );
 };
