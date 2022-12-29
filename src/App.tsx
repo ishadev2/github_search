@@ -9,7 +9,7 @@ import { loaderStatus } from "./services/loader";
 import "./App.css";
 
 const App = (): JSX.Element => {
-  const [searchWords, setSearchWords] = useState<string>("ichigo-api"); //stores keywords to search
+  const [searchWords, setSearchWords] = useState<string>(""); //stores keywords to search
   const [respond, setRespond] = useState<any[]>([]); //stores returned responce
   const [showLoader, setShowLoader] = useState<any>(false);
 

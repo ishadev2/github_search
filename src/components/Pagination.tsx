@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { doSearch } from "../services/search";
 
+import styles from "./Pagination.module.css";
+
 const Pagination = (props: any): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(1); //current page number
 
@@ -10,9 +12,16 @@ const Pagination = (props: any): JSX.Element => {
 
   // show limited pagination spreading according to current page
   const pageNumbers = [];
-  const pageTotal = Math.ceil(
+
+  let pageTotal = Math.ceil(
     props.resCount / Number(process.env.REACT_APP_PER_PAGE_COUNT)
   );
+
+  //GitHub support only 1000 records
+  if(props.resCount > 1000) {
+    pageTotal = 50;
+  }
+
   const startPage = currentPage > 5 ? currentPage - 5 : 1; // pagination first
   const lastPage = pageTotal < currentPage + 5 ? pageTotal : currentPage + 5; // pagination last
 
@@ -26,7 +35,7 @@ const Pagination = (props: any): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className={styles.paginationBar}>
       {startPage > 1 && (
         <button
           key={1}
@@ -46,7 +55,7 @@ const Pagination = (props: any): JSX.Element => {
               onClick={(e: React.SyntheticEvent) => {
                 paginatePage(e, pageNumber);
               }}
-              className={currentPage === pageNumber ? "active" : ""}
+              className={currentPage === pageNumber ? styles.activeBtn : ""}
               disabled={props.showLoader}
             >
               {pageNumber}
