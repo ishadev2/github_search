@@ -16,9 +16,9 @@ const doSearch = async (e: React.SyntheticEvent, keywords: string, callback: any
 
     try {
       const { data } = await axios.get(String(process.env.REACT_APP_API_URL), {
-        headers: {
+        /*headers: {
           Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`
-        },
+        },*/
         params: {
           q: keywords,
           page: page,
