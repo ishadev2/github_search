@@ -2,12 +2,17 @@ import React from "react";
 import axios from "axios";
 
 import { loaderStatus } from "../services/loader";
-
-let throttleHolder = false;
+import { throttleStatus } from "../services/throttler";
 
 // get search results from API
 const doSearch = async (e: React.SyntheticEvent, keywords: string, callback: any, page: number = 1): Promise<any> => {
   e.preventDefault();
+
+  let throttleHolder:any = false;
+
+  throttleStatus.subscribe(result => {
+    throttleHolder = result;
+  });
 
   if (!throttleHolder) {
     loaderStatus.next(true); // start loader
@@ -34,12 +39,12 @@ const doSearch = async (e: React.SyntheticEvent, keywords: string, callback: any
 
     loaderStatus.next(false); // finish loader
 
-    throttleHolder = true; // set throttling
+    throttleStatus.next(true); // set throttling
   }
 
   // release throttling after given time
   setTimeout(() => {
-    throttleHolder = false;
+    throttleStatus.next(false);
   }, Number(process.env.REACT_APP_API_THROTTLING_DELAY));
 };
 

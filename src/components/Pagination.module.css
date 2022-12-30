@@ -19,3 +19,8 @@
   font-weight: bolder;
   color: rgb(46, 46, 46);
 }
+
+.paginationBar button:disabled {
+  color: rgb(229, 229, 229);
+  cursor: not-allowed;
+}

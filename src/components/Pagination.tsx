@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { doSearch } from "../services/search";
+import { throttleStatus } from "../services/throttler";
 
 import styles from "./Pagination.module.css";
 
 const Pagination = (props: any): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(1); //current page number
+  const [throttlerStatus, setThrottlerStatus] = useState<any>(false);
+
+  throttleStatus.subscribe(result => {
+    setThrottlerStatus(result);
+  });
 
   useEffect(() => {
     setCurrentPage(1);
@@ -42,7 +48,7 @@ const Pagination = (props: any): JSX.Element => {
           onClick={(e: React.SyntheticEvent) => {
             paginatePage(e, 1);
           }}
-          disabled={props.showLoader}
+          disabled={props.showLoader || throttlerStatus}
         >
           1 ...
         </button>
@@ -56,7 +62,7 @@ const Pagination = (props: any): JSX.Element => {
                 paginatePage(e, pageNumber);
               }}
               className={currentPage === pageNumber ? styles.activeBtn : ""}
-              disabled={props.showLoader}
+              disabled={props.showLoader || throttlerStatus}
             >
               {pageNumber}
             </button>
@@ -68,7 +74,7 @@ const Pagination = (props: any): JSX.Element => {
           onClick={(e: React.SyntheticEvent) => {
             paginatePage(e, pageTotal);
           }}
-          disabled={props.showLoader}
+          disabled={props.showLoader || throttlerStatus}
         >
           ... {pageTotal}
         </button>
