@@ -35,7 +35,7 @@ const Pagination = (props: any): JSX.Element => {
   };
 
   return (
-    <div className={styles.paginationBar}>
+    <div className={styles.paginationBar} data-testid="pagination_bar">
       {startPage > 1 && (
         <button
           key={1}

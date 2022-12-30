@@ -14,7 +14,7 @@ const ResultView = (props: any): JSX.Element => {
   }, [props.results]);
 
   return (
-    <div className={styles.resultContainer}>
+    <div className={styles.resultContainer} data-testid="result_container">
       {resCount < 0 ? (
         <div className={styles.resultInfo}>
           Error occurred. Please try again later.
@@ -22,7 +22,8 @@ const ResultView = (props: any): JSX.Element => {
       ) : (
         resCount >= 0 && (
           <div className={styles.resultInfo}>
-            {resCount} result{resCount > 1 && "s"} found. {resCount > 1000 && "(1000 records visible)"}
+            {resCount} result{resCount > 1 && "s"} found.{" "}
+            {resCount > 1000 && "(1000 records visible)"}
           </div>
         )
       )}
@@ -36,7 +37,7 @@ const ResultView = (props: any): JSX.Element => {
         />
       )}
 
-      <div className={styles.resultList}>
+      <div className={styles.resultList} data-testid="result_list">
         {results &&
           results.map((entry: any, i: number) => {
             return (
@@ -45,6 +46,8 @@ const ResultView = (props: any): JSX.Element => {
                 className={styles.resultItem}
                 href={entry.html_url}
                 target="_blank"
+                rel="noreferrer"
+                data-testid="result_item"
               >
                 <div className={styles.resultTitle}>{entry.name}</div>
                 <div className={styles.resultDesc}>{entry.description}</div>
@@ -53,7 +56,11 @@ const ResultView = (props: any): JSX.Element => {
             );
           })}
 
-        {!results && <div className={styles.resultDesc}>Enter the keywords to search public repositories from GitHub</div>}
+        {!results && (
+          <div className={styles.resultDesc}>
+            Enter the keywords to search public repositories from GitHub
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,9 +2,9 @@ import React from "react";
 
 import { doSearch } from "../services/search";
 
-import styles from "./Search.module.css";
+import styles from "./SearchFrom.module.css";
 
-const Search = (props: any): JSX.Element => {
+const SearchFrom = (props: any): JSX.Element => {
   return (
     <div className={styles.searchContainer}>
       <form
@@ -20,15 +20,17 @@ const Search = (props: any): JSX.Element => {
           onChange={(e: React.FormEvent<HTMLInputElement>): void =>
             props.setSearchWords(e.currentTarget.value)
           }
+          data-testid="keywords_input"
         />
         <input
           type="submit"
           value="Search"
           disabled={props.searchWords.length < 2 || props.showLoader}
+          data-testid="submit_btn"
         />
       </form>
     </div>
   );
 };
 
-export default Search;
+export default SearchFrom;

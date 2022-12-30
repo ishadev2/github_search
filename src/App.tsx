@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import Search from "./components/Search";
+import SearchFrom from "./components/SearchFrom";
 import ResultView from "./components/ResultView";
 import LoadingScreen from "./components/LoadingScreen";
 
@@ -22,7 +22,7 @@ const App = (): JSX.Element => {
   return (
     <div className="App">
       {showLoader && <LoadingScreen />}
-      <Search
+      <SearchFrom
         searchWords={searchWords}
         setSearchWords={setSearchWords}
         setRespond={setRespond}
